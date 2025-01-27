@@ -1,0 +1,102 @@
+# Build pipeline for monogame projects
+# Env: Dotnet 8 (monogame image ver. 1.3)
+# Last modified: 2024-10
+# Author: Ralf Hesse
+#
+# Required secrets:
+#   game_project: Project Name (aka the .sln solution name)
+#   project_key: Sonar project key (e.g. Sopra24:Gruppe-1)
+#   sonar_token: Sonar authentication token
+#   gitea_token: Gitea authentication token, used for publishing release builds
+
+# define global variables
+variables:
+  - &monogame_image "thowl/monogame:1.3"
+
+# customized clone step (executed before ci pipeline is started)
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      depth: 0
+      lfs: false
+    when:
+      - event:
+          exclude: [release]
+
+# the build pipeline
+# commits in main and release trigger a full analyzed build
+# every other commit gets compiled only
+steps:
+  # STEP 1: run compiler in debug mode (every branch except release) and do not
+  #         perform a sonar analysis
+  compile:
+    image: *monogame_image
+    commands:
+      - dotnet restore $${GAME_PROJECT}.sln
+      - dotnet build --configuration Debug $${GAME_PROJECT}.sln
+    secrets: [game_project]
+    when:
+      - branch:
+          exclude: [main, release, cicd]
+        event: [push, manual]
+
+  # STEP 1 (main/release): build the app and run a full scan on sonarqube (only in release)
+  #        This step is performed on [main, release] branche only.
+  compile-and-analyze:
+    image: *monogame_image
+    environment:
+      - SONAR_HOST=https://sonar.aes.th-owl.de
+    commands:
+      - echo "Build and analyze project. Sonarqube host=$${SONAR_HOST}"
+      - dotnet restore $${GAME_PROJECT}.sln
+      - dotnet sonarscanner begin /k:$PROJECT_KEY /d:sonar.scanner.skipJreProvisioning=true /d:sonar.host.url=$SONAR_HOST /d:sonar.token=$SONAR_TOKEN /v:$CI_COMMIT_BRANCH
+      - dotnet build --configuration Release $${GAME_PROJECT}.sln
+      - dotnet sonarscanner end /d:sonar.token=$SONAR_TOKEN
+    secrets: [project_key, sonar_token, game_project]
+    when:
+      - branch: [main, release, cicd]
+        event: [push, manual, tag]
+
+  # STEP 2 (main/release): package the app (currently only a windows binary is published)
+  build-deployment:
+    image: *monogame_image
+    depends_on: compile-and-analyze
+    environment:
+      - DOTNET_RUNTIME=8.0
+    commands:
+      - echo "Building the deployment packages"
+      - dotnet restore $${GAME_PROJECT}.sln
+      - dotnet build --configuration Release $${GAME_PROJECT}.sln
+      - echo "Creating multiple versions for WIN/Linux/Mac"
+      - dotnet publish --runtime win-x64 --configuration Release --self-contained=false $${GAME_PROJECT}.sln
+      - dotnet publish --runtime osx-x64 --configuration Release --self-contained=false $${GAME_PROJECT}.sln
+      - dotnet publish --runtime linux-x64 --configuration Release --self-contained=false $${GAME_PROJECT}.sln
+      - mkdir dist
+      - 7z a dist/$${GAME_PROJECT}_windows.zip $${GAME_PROJECT}/bin/Release/net$${DOTNET_RUNTIME}/win-x64/publish/*
+      - 7z a dist/$${GAME_PROJECT}_linux.zip $${GAME_PROJECT}/bin/Release/net$${DOTNET_RUNTIME}/linux-x64/publish/*
+      - 7z a dist/$${GAME_PROJECT}_macos.zip $${GAME_PROJECT}/bin/Release/net$${DOTNET_RUNTIME}/osx-x64/publish/*
+      - mkdir stats
+      - echo "#Release Notes:" > stats/RELEASE-NOTES.md
+      - echo "- Autocreated by Woodpecker" > stats/RELEASE-NOTES.md
+      - echo "ready for deployment:"
+      - ls dist/*
+    secrets: [game_project]
+    when:
+      - event: [tag]
+
+  # STEP 3 (tag only): append the binaries to gitea's release
+  publish-release:
+    image: woodpeckerci/plugin-release
+    depends_on: build-deployment
+    settings:
+      base_url: https://gitea.aes.th-owl.de
+      checksum: sha1
+      note: stats/RELEASE-NOTES.md
+      api_key:
+        from_secret: GITEA_TOKEN
+      files:
+        - dist/*
+      target: release
+    when:
+      - event: tag

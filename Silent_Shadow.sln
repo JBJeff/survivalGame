@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent_Shadow", "Silent_Shadow\Silent_Shadow.csproj", "{95376A7A-8F74-4F99-AF18-A7645FE54851}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silent_Shadow.Tests", "Silent_Shadow.Tests\Silent_Shadow.Tests.csproj", "{7E3855D6-F6B3-4A98-AAA4-0E79C1C79171}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95376A7A-8F74-4F99-AF18-A7645FE54851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95376A7A-8F74-4F99-AF18-A7645FE54851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95376A7A-8F74-4F99-AF18-A7645FE54851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95376A7A-8F74-4F99-AF18-A7645FE54851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E3855D6-F6B3-4A98-AAA4-0E79C1C79171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E3855D6-F6B3-4A98-AAA4-0E79C1C79171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E3855D6-F6B3-4A98-AAA4-0E79C1C79171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E3855D6-F6B3-4A98-AAA4-0E79C1C79171}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {992872DD-0D90-4E57-BD7A-D13E58D7D809}
+	EndGlobalSection
+EndGlobal

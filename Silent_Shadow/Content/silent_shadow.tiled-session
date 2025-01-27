@@ -1,0 +1,112 @@
+{
+    "activeFile": "Maps/firstlevel.tmx",
+    "expandedProjectPaths": [
+        "TiledObjectTemplates",
+        ".",
+        "TiledObjectTemplates/Enemys",
+        "Maps"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "D:/Projekte/silent_shadow/Silent_Shadow/bin/Release/net8.0/Content/TechSet.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Projekte/silent_shadow/Silent_Shadow/bin/Release/net8.0/Content/firstLevel.tmx": {
+            "scale": 0.45125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 640.4432132963991,
+                "y": 640.4432132963989
+            }
+        },
+        "Maps/Level1_Bosslevel.tmx": {
+            "expandedObjectLayers": [
+                25,
+                17,
+                12,
+                9,
+                24
+            ],
+            "scale": 1.5,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 268.66666666666663,
+                "y": 184.99999999999997
+            }
+        },
+        "Maps/Level_3.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 504,
+                "y": 640.5
+            }
+        },
+        "Maps/TechSet.tsx": {
+            "scaleInDock": 1
+        },
+        "Maps/erste.tmx": {
+            "scale": 0.45125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 640.4432132963991,
+                "y": 669.2520775623269
+            }
+        },
+        "Maps/firstlevel.tmx": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 465.5,
+                "y": 367
+            }
+        },
+        "TileSheets/ItemsAndProps.tsx": {
+            "scaleInDock": 1.5
+        },
+        "TileSheets/MansionTileSets/Art_1.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/Gym.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/Kitchen.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/Living_Room.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/Music_and_sport.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/RoomBuilder.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/MansionTileSets/Stairs.tsx": {
+            "scaleInDock": 1
+        },
+        "TileSheets/TechSet.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "TileSheets/tileset_1.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "Maps/firstlevel.tmx",
+        "Maps/Level_3.tmx"
+    ],
+    "project": "silent_shadow.tiled-project",
+    "recentFiles": [
+        "Maps/Level_3.tmx",
+        "Maps/firstlevel.tmx",
+        "Maps/Level1_Bosslevel.tmx"
+    ]
+}

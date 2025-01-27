@@ -1,0 +1,35 @@
+{
+  "guards": [
+    {
+      "trigger": "idle",
+      "lines": [
+        "All quiet here.",
+        "It's just another boring night...",
+        "I should've brought a coffee."
+      ]
+    },
+    {
+      "trigger": "cautious",
+      "lines": [
+        "Where did they go?",
+        "Must have been nothing...",
+        "Keep searching!"
+      ]
+    },
+    {
+      "trigger": "alert",
+      "lines": [
+        "There they are!",
+        "Stop right there!",
+        "Intruder alert!"
+      ]
+    },
+    {
+      "trigger": "combat",
+      "lines": [
+        "You picked the wrong house, fool!",
+        "Surrender!"
+      ]
+    }
+  ]
+}
